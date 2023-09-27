@@ -11,10 +11,6 @@ public class EnemyController : MonoBehaviour
     // speed
     public float speed = 2;
 
-    // sound effect
-    public AudioClip horse;
-    public AudioSource kill;
-
     // direction
     int direction = 1;
 
@@ -39,8 +35,6 @@ public class EnemyController : MonoBehaviour
         // initial state
         currState = State.MovingHorizontally;
 
-        //initiate sound effect
-        kill = GetComponent<AudioSource>();
 
         // game manager
         gm = GameObject.FindObjectOfType<GameManager>();
@@ -123,7 +117,7 @@ public class EnemyController : MonoBehaviour
         currState = State.Dead;
 
         //[implement your own effect here]
-        kill.PlayOneShot(horse);
+        FindObjectOfType<AudioManager>().Play("EnemyDeath");
 
         //[Example]
         Destroy(gameObject);
