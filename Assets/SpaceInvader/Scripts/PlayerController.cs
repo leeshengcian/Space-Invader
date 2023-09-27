@@ -14,13 +14,15 @@ public class PlayerController : MonoBehaviour
     // bullet prefab
     public GameObject bulletPrefab;
 
+    // haptic clip
+    public AudioClip HapticAudioClip;
+
     [Range(0.01f, 1f)]
     public float speedH = 1.0f;
     [Range(0.01f, 1f)]
     public float speedV = 1.0f;
 
     GameManager gm;
-
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +61,8 @@ public class PlayerController : MonoBehaviour
         // shoot gun
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
         {
+            OVRHapticsClip HaptiClip = new OVRHapticsClip(HapticAudioClip);
+            OVRHaptics.RightChannel.Preempt(HaptiClip);
             OnFire();
         }
     }
