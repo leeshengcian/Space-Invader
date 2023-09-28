@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
         // shoot gun
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
         {
+            // OVR vibration feedback
             OVRHapticsClip HaptiClip = new OVRHapticsClip(HapticAudioClip);
             OVRHaptics.RightChannel.Preempt(HaptiClip);
             OnFire();
