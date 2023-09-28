@@ -19,12 +19,19 @@ public class EnemyManager : MonoBehaviour
     // enemy prefab
     public GameObject enemyPrefab;
 
+    public GameManager gm;
+
     // number of enemies
     public int numEnemies;
     
-    public void CreateEnemyWave()
+    public void CreateEnemyWave(GameManager.State state)
     {
         // calculate number of enemies
+        // increase number of enemies in Level 2
+        if (state == GameManager.State.Playing_Lv2)
+        {
+            numZ = 2;
+        }
         numEnemies = numZ * numX * numY;
 
         Vector3 startPos = transform.position;

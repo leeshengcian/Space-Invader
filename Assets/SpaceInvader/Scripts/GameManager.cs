@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public Text uiText;
 
     //states
-    enum State { NotStarted, Playing, GameOver, WonGame }
+    [HideInInspector]
+    public enum State { NotStarted, Playing_Lv1, Won_Lv1, Playing_Lv2, GameOver, WonGame }
 
     // current state
     State currState;
@@ -44,7 +45,8 @@ public class GameManager : MonoBehaviour
                 uiText.text = "Shoot here to begin";
                 break;
 
-            case State.Playing:
+            case State.Playing_Lv1:
+            case State.Playing_Lv2:
                 uiText.text = "Enemies left: " + enemyManager.numEnemies;
                 break;
 
@@ -52,6 +54,9 @@ public class GameManager : MonoBehaviour
                 uiText.text = "Game Over! Shoot here";
                 break;
 
+            case State.Won_Lv1:
+                uiText.text = "Level 2 get ready";
+                break;
             case State.WonGame:
                 uiText.text = "YOU WON! Shoot here";
                 break;
@@ -60,14 +65,28 @@ public class GameManager : MonoBehaviour
 
     public void InitGame()
     {
-        //don't initiate the game if the game is already running!
-        if (currState == State.Playing) return;
+        
+        /*if (currState == State.Playing_Lv1) return;
+        currState = State.Playing_Lv1;*/
 
         // set the state
-        currState = State.Playing;
+        switch (currState)
+        {
+            case State.NotStarted:
+                currState = State.Playing_Lv1;
+                break;
+            // don't initiate the game if the game is already running!
+            case State.Playing_Lv1:
+                return;
+            case State.Won_Lv1:
+                currState = State.Playing_Lv2;
+                break;
+            case State.Playing_Lv2:
+                return;
+        }
 
         // create enemy wave
-        enemyManager.CreateEnemyWave();
+        enemyManager.CreateEnemyWave(currState);
 
         // show text on the graffiti
         RefreshUI();
@@ -92,7 +111,7 @@ public class GameManager : MonoBehaviour
     // checks whether we've won, and if we did win, refresh UI
     public void HandleEnemyDead()
     {
-        if (currState != State.Playing) return;
+        if (currState != State.Playing_Lv1 && currState != State.Playing_Lv2) return;
 
         RefreshUI();
 
@@ -100,7 +119,14 @@ public class GameManager : MonoBehaviour
         if(enemyManager.numEnemies <= 0)
         {
             // set the state of the game
-            currState = State.WonGame;
+            if (currState == State.Playing_Lv1)
+            {
+                currState = State.Won_Lv1;
+            }
+            else if (currState == State.Playing_Lv2)
+            {
+                currState = State.WonGame;
+            }
 
             // show text on the graffiti
             RefreshUI();
