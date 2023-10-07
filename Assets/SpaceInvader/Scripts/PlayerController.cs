@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed = 10;
 
     // Gun shoot out position
-    public GameObject ShootOutput;
+    public GameObject ShootOutput_Gun1;
+    public GameObject ShootOutput_Gun2;
 
     // bullet prefab
     public GameObject bulletPrefab;
@@ -21,8 +22,9 @@ public class PlayerController : MonoBehaviour
     public float speedH = 1.0f;
     [Range(0.01f, 1f)]
     public float speedV = 1.0f;
-
+    
     GameManager gm;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour
         GunActionManager();
     }
 
-    void OnFire()
+    void OnFire(GameObject ShootOutput)
     {
         // spawn a new bullet
         GameObject newBullet = Instantiate(bulletPrefab);
@@ -62,10 +64,26 @@ public class PlayerController : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
         {
             // OVR vibration feedback
-            OVRHapticsClip HaptiClip = new OVRHapticsClip(HapticAudioClip);
+            OVRHapticsClip HaptiClip = new (HapticAudioClip);
             OVRHaptics.RightChannel.Preempt(HaptiClip);
-            OnFire();
+
+            // gun shot audio effect
+            FindObjectOfType<AudioManager>().Play("BulletShot");
+
+            OnFire(ShootOutput_Gun1);
         }
+        else if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        {
+            // OVR vibration feedback
+            OVRHapticsClip HaptiClip = new(HapticAudioClip);
+            OVRHaptics.LeftChannel.Preempt(HaptiClip);
+
+            // gun shot audio effect
+            FindObjectOfType<AudioManager>().Play("BulletShot");
+
+            OnFire(ShootOutput_Gun2);
+        }
+        
     }
 
     
