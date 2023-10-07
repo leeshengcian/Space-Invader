@@ -1391,6 +1391,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: e73b66c29312de047ba040fb2231cdda, type: 3}
     volume: 1
     source: {fileID: 0}
+  - name: Locomotion
+    clip: {fileID: 8300000, guid: 6ad851833fd5df24c84fbadccdab63d2, type: 3}
+    volume: 1
+    source: {fileID: 0}
 --- !u!4 &1066948151
 Transform:
   m_ObjectHideFlags: 0
@@ -2016,6 +2020,10 @@ PrefabInstance:
     - target: {fileID: 7694081326660228579, guid: f6f1dd355c48a314582e2d8e655d9dae, type: 3}
       propertyPath: m_BackGroundColor.r
       value: 0.627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 8375600266296809921, guid: f6f1dd355c48a314582e2d8e655d9dae, type: 3}
+      propertyPath: EnableRotationDuringAim
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9201522936464702952, guid: f6f1dd355c48a314582e2d8e655d9dae, type: 3}
       propertyPath: m_ClearFlags

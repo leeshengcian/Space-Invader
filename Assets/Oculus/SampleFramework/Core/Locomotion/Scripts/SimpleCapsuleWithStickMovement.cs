@@ -62,6 +62,9 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 
         Vector3 moveDir = Vector3.zero;
         Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+        if (primaryAxis != Vector2.zero) {
+            FindObjectOfType<AudioManager>().Play("Locomotion");
+        }
         moveDir += ort * (primaryAxis.x * Vector3.right);
         moveDir += ort * (primaryAxis.y * Vector3.forward);
         //_rigidbody.MovePosition(_rigidbody.transform.position + moveDir * Speed * Time.fixedDeltaTime);
