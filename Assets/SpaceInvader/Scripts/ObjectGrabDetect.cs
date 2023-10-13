@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ObjectGrabDetect : MonoBehaviour
 {
+    // check whether the object is being grabbed
+    public bool GunGrabbed;
+
     // check whether hand is grabbing object
     private OVRGrabbable ovrGrab;
     private bool isGrabGun = false;
@@ -17,7 +20,8 @@ public class ObjectGrabDetect : MonoBehaviour
     {
         if (ovrGrab.isGrabbed) isGrabGun = true;
         else isGrabGun = false;
-            
+
+        GunGrabbed = isGrabGun;
     }
     
     public bool isCurrentGrabGun()

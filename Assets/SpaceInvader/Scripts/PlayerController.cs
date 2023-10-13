@@ -9,8 +9,15 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed = 10;
 
     // Gun shoot out position
+    public GameObject ShootOutput_CubeGun;
     public GameObject ShootOutput_Gun1;
     public GameObject ShootOutput_Gun2;
+    [HideInInspector]
+    public GameObject ShootOutput;
+
+    //public ObjectGrabDetect gun;
+    public GameObject gun1;
+    public GameObject gun2;
 
     // bullet prefab
     public GameObject bulletPrefab;
@@ -58,33 +65,41 @@ public class PlayerController : MonoBehaviour
         bulletRb.velocity = ShootOutput.transform.forward * bulletSpeed;
     }
 
+
     void GunActionManager()
     {
         // shoot gun
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
         {
             // OVR vibration feedback
-            OVRHapticsClip HaptiClip = new (HapticAudioClip);
+            OVRHapticsClip HaptiClip = new(HapticAudioClip);
             OVRHaptics.RightChannel.Preempt(HaptiClip);
 
             // gun shot audio effect
             FindObjectOfType<AudioManager>().Play("BulletShot");
 
-            OnFire(ShootOutput_Gun1);
+            OnFire(ShootOutput_CubeGun);
         }
-        else if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+
+        else if (gun1.GetComponent<ObjectGrabDetect>().GunGrabbed == true || gun2.GetComponent<ObjectGrabDetect>().GunGrabbed == true)
         {
-            // OVR vibration feedback
-            OVRHapticsClip HaptiClip = new(HapticAudioClip);
-            OVRHaptics.LeftChannel.Preempt(HaptiClip);
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+            {
+                // OVR vibration feedback
+                OVRHapticsClip HaptiClip = new(HapticAudioClip);
+                OVRHaptics.LeftChannel.Preempt(HaptiClip);
 
-            // gun shot audio effect
-            FindObjectOfType<AudioManager>().Play("BulletShot");
+                // gun shot audio effect
+                FindObjectOfType<AudioManager>().Play("BulletShot");
 
-            OnFire(ShootOutput_Gun2);
+                ShootOutput = ShootOutput_Gun1;
+                // if current geab gun is SpaceGun2
+                if (gun2.GetComponent<ObjectGrabDetect>().GunGrabbed == true)
+                {
+                    ShootOutput = ShootOutput_Gun2;
+                }
+                OnFire(ShootOutput);
+            }
         }
-        
     }
-
-    
 }
