@@ -4,8 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - horse: {fileID: 8300000, guid: 494bd1721199a40c5a79fa3011793556, type: 3}
-  - kill: {instanceID: 0}
+  - particles: {fileID: 8773627650476568261, guid: 266d5cfbf557b3c44b3ed0ee3bdedfcc, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

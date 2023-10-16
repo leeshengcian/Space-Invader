@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
     // accumulated movement
     float accMovement = 0;
 
+    ParticleSystem BloodParticle;
+
      // available states
     enum State { MovingHorizontally, MovingVertically, Dead};
     
@@ -34,7 +36,6 @@ public class EnemyController : MonoBehaviour
     {
         // initial state
         currState = State.MovingHorizontally;
-
 
         // game manager
         gm = GameObject.FindObjectOfType<GameManager>();
@@ -118,9 +119,11 @@ public class EnemyController : MonoBehaviour
 
         //[implement your own effect here]
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
-
         //[Example]
         Destroy(gameObject);
+        BloodParticle = FindObjectOfType<ParticleSystem>();
+        BloodParticle.transform.position = transform.position;
+        BloodParticle.Play();
         //[End of Example]
 
         // decrease number of enemies
