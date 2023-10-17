@@ -66,15 +66,15 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EdgePosition: 1
-    - _FadeEnd: -1
-    - _FadeStart: 1
+    - _FadeEnd: -0.7
+    - _FadeStart: 0.821
     - _FrontFactor: 0
     - _Glossiness: 0.5
     - _GlowEnd: 0.07
     - _GlowEndEnd: 0
     - _GlowStart: 0.33
     - _GlowStartEnd: 0.3
-    - _Intensity: 1
+    - _Intensity: 0.434
     - _InvFade: 1
     - _Metallic: 0
     - _Mode: 0
