@@ -20,8 +20,8 @@ public class ObjectGrabDetect : MonoBehaviour
 
     private void Update()
     {
-        Arrow.transform.position = transform.position;
         Arrow.SetActive(true);
+
         if (ovrGrab.isGrabbed) {
             isGrabGun = true;
             Arrow.SetActive(false);
