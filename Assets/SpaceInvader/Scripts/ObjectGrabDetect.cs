@@ -15,7 +15,6 @@ public class ObjectGrabDetect : MonoBehaviour
     private void Start()
     {
         ovrGrab = GetComponent<OVRGrabbable>();
-        Arrow.GetComponent<Animation>().Play();
     }
 
     private void Update()
@@ -29,6 +28,11 @@ public class ObjectGrabDetect : MonoBehaviour
         else isGrabGun = false;
 
         GunGrabbed = isGrabGun;
+
+        Arrow.transform.position = new Vector3(transform.position.x, Arrow.transform.position.y, transform.position.z);
+        
+        Debug.Log("Gun Transform is: " + transform.position);
+        Debug.Log("Arrow Transform is: " + Arrow.transform.position);
     }
     
     public bool isCurrentGrabGun()
