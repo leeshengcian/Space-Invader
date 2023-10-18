@@ -6,6 +6,8 @@ public class ObjectGrabDetect : MonoBehaviour
 {
     // check whether the object is being grabbed
     public bool GunGrabbed;
+
+    // Floating Arrow point at gun 
     public GameObject Arrow;
 
     // check whether hand is grabbing object
@@ -31,8 +33,8 @@ public class ObjectGrabDetect : MonoBehaviour
 
         Arrow.transform.position = new Vector3(transform.position.x, Arrow.transform.position.y, transform.position.z);
         
-        Debug.Log("Gun Transform is: " + transform.position);
-        Debug.Log("Arrow Transform is: " + Arrow.transform.position);
+        //Debug.Log("Gun Transform is: " + transform.position);
+        //Debug.Log("Arrow Transform is: " + Arrow.transform.position);
     }
     
     public bool isCurrentGrabGun()
