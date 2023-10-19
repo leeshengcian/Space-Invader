@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("BulletShot");
 
                 ShootOutput = ShootOutput_Gun1;
-                // if current geab gun is SpaceGun2
+                // if current grab gun is SpaceGun2
                 if (gun2.GetComponent<ObjectGrabDetect>().GunGrabbed == true)
                 {
                     ShootOutput = ShootOutput_Gun2;

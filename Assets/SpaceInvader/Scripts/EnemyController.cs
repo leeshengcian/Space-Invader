@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    //ParticleSystem BloodParticle;
+    public GameObject BloodParticle;
+
     // movement range
     public float rangeH = 5;
     public float rangeV = 1;
@@ -16,8 +19,6 @@ public class EnemyController : MonoBehaviour
 
     // accumulated movement
     float accMovement = 0;
-
-    ParticleSystem BloodParticle;
 
      // available states
     enum State { MovingHorizontally, MovingVertically, Dead};
@@ -36,6 +37,8 @@ public class EnemyController : MonoBehaviour
     {
         // initial state
         currState = State.MovingHorizontally;
+
+        BloodParticle = GameObject.Find("Blood");
 
         // game manager
         gm = GameObject.FindObjectOfType<GameManager>();
@@ -121,9 +124,9 @@ public class EnemyController : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
         //[Example]
         Destroy(gameObject);
-        BloodParticle = FindObjectOfType<ParticleSystem>();
+        //BloodParticle = FindObjectOfType<ParticleSystem>();
         BloodParticle.transform.position = transform.position;
-        BloodParticle.Play();
+        BloodParticle.GetComponent<ParticleSystem>().Play();
         //[End of Example]
 
         // decrease number of enemies

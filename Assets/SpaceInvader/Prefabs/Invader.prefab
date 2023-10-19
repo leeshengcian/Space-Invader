@@ -96,11 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d344a7d5be0247947951341b204ba7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BloodParticle: {fileID: 0}
   rangeH: 5
   rangeV: 1
   speed: 2
-  horse: {fileID: 0}
-  kill: {fileID: 0}
 --- !u!82 &-9199572093217792808
 AudioSource:
   m_ObjectHideFlags: 0
