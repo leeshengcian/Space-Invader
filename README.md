@@ -1,2 +1,2 @@
 # Space-Invader
-2023 Autumn IVDR project
+2023 Autumn IDVR project
