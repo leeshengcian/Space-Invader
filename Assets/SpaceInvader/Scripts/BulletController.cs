@@ -43,7 +43,5 @@ public class BulletController : MonoBehaviour
             gm.InitGame();
             Destroy(gameObject);
         }
-
-        
     }
 }

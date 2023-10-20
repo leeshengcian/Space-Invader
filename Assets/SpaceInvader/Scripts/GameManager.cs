@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     // graffiti
     public Text uiText;
 
-    //states
+    // states
     [HideInInspector]
     public enum State { NotStarted, Playing_Lv1, Won_Lv1, Playing_Lv2, GameOver, WonGame }
 
@@ -65,10 +65,6 @@ public class GameManager : MonoBehaviour
 
     public void InitGame()
     {
-        
-        /*if (currState == State.Playing_Lv1) return;
-        currState = State.Playing_Lv1;*/
-
         // set the state
         switch (currState)
         {

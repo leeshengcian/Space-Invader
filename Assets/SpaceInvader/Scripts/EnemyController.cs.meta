@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - particles: {fileID: 8773627650476568261, guid: 266d5cfbf557b3c44b3ed0ee3bdedfcc, type: 3}
+  - BloodParticle: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
