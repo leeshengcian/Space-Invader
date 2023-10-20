@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed = 10;
 
     // Gun shoot out position
-    public GameObject ShootOutput_CubeGun;
     public GameObject ShootOutput_Gun1;
     public GameObject ShootOutput_Gun2;
     [HideInInspector]
@@ -69,6 +68,66 @@ public class PlayerController : MonoBehaviour
     void GunActionManager()
     {
         // shoot gun
+        // Case 1: both guns were grabbed
+        if (gun1.GetComponent<ObjectGrabDetect>().GunGrabbed == true && gun2.GetComponent<ObjectGrabDetect>().GunGrabbed == true)
+        {
+            if (gun1.GetComponent<ObjectGrabDetect>().hand.name == "DistanceGrabHandLeft")
+            {
+                GrabLeftHandGunFire(ShootOutput_Gun1);
+                GrabRightHandGunFire(ShootOutput_Gun2);
+            }
+            else
+            {
+                GrabRightHandGunFire(ShootOutput_Gun1);
+                GrabLeftHandGunFire(ShootOutput_Gun2);
+            }
+        }
+        
+        // Case 2: gun1 is grabbed
+        else if (gun1.GetComponent<ObjectGrabDetect>().GunGrabbed == true)
+        {
+            if (gun1.GetComponent<ObjectGrabDetect>().hand.name == "DistanceGrabHandLeft")
+            {
+                GrabLeftHandGunFire(ShootOutput_Gun1);
+            }
+
+            else if ((gun1.GetComponent<ObjectGrabDetect>().hand.name == "DistanceGrabHandRight"))
+                GrabRightHandGunFire(ShootOutput_Gun1);
+        }
+
+        // Case 3: gun2 is grabbed
+        else if (gun2.GetComponent<ObjectGrabDetect>().GunGrabbed == true)
+        {
+            if (gun2.GetComponent<ObjectGrabDetect>().hand.name == "DistanceGrabHandLeft")
+            {
+                GrabLeftHandGunFire(ShootOutput_Gun2);
+            }
+
+            else if ((gun2.GetComponent<ObjectGrabDetect>().hand.name == "DistanceGrabHandRight"))
+                GrabRightHandGunFire(ShootOutput_Gun2);
+        }
+    }
+
+    // call this function when current grabbing hand is Left Hand
+    void GrabLeftHandGunFire(GameObject ShootOutput)
+    {
+        // pull the trigger
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        {
+            // OVR vibration feedback
+            OVRHapticsClip HaptiClip = new(HapticAudioClip);
+            OVRHaptics.LeftChannel.Preempt(HaptiClip);
+
+            // gun shot audio effect
+            FindObjectOfType<AudioManager>().Play("BulletShot");
+            OnFire(ShootOutput);
+        }
+    }
+
+    // call this function when current grabbing hand is Right Hand
+    void GrabRightHandGunFire(GameObject ShootOutput)
+    {
+        // pull the trigger
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
         {
             // OVR vibration feedback
@@ -77,29 +136,7 @@ public class PlayerController : MonoBehaviour
 
             // gun shot audio effect
             FindObjectOfType<AudioManager>().Play("BulletShot");
-
-            OnFire(ShootOutput_CubeGun);
-        }
-
-        else if (gun1.GetComponent<ObjectGrabDetect>().GunGrabbed == true || gun2.GetComponent<ObjectGrabDetect>().GunGrabbed == true)
-        {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
-            {
-                // OVR vibration feedback
-                OVRHapticsClip HaptiClip = new(HapticAudioClip);
-                OVRHaptics.LeftChannel.Preempt(HaptiClip);
-
-                // gun shot audio effect
-                FindObjectOfType<AudioManager>().Play("BulletShot");
-
-                ShootOutput = ShootOutput_Gun1;
-                // if current grab gun is SpaceGun2
-                if (gun2.GetComponent<ObjectGrabDetect>().GunGrabbed == true)
-                {
-                    ShootOutput = ShootOutput_Gun2;
-                }
-                OnFire(ShootOutput);
-            }
+            OnFire(ShootOutput);
         }
     }
 }

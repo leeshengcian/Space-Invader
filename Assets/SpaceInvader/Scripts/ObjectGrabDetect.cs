@@ -7,6 +7,10 @@ public class ObjectGrabDetect : MonoBehaviour
     // check whether the object is being grabbed
     public bool GunGrabbed;
 
+    // Indicate which hand is grabbing this GameObject
+    [HideInInspector]
+    public OVRGrabber hand;
+
     // Floating Arrow point at gun 
     public GameObject Arrow;
 
@@ -17,6 +21,7 @@ public class ObjectGrabDetect : MonoBehaviour
     private void Start()
     {
         ovrGrab = GetComponent<OVRGrabbable>();
+        hand = GetComponent<OVRGrabber>();
     }
 
     private void Update()
@@ -30,11 +35,11 @@ public class ObjectGrabDetect : MonoBehaviour
         else isGrabGun = false;
 
         GunGrabbed = isGrabGun;
-
-        Arrow.transform.position = new Vector3(transform.position.x, Arrow.transform.position.y, transform.position.z);
         
-        //Debug.Log("Gun Transform is: " + transform.position);
-        //Debug.Log("Arrow Transform is: " + Arrow.transform.position);
+        hand = ovrGrab.grabbedBy;
+
+        // Arrow must follow the gun's (x, z) coordination
+        Arrow.transform.position = new Vector3(transform.position.x, Arrow.transform.position.y, transform.position.z);
     }
     
     public bool isCurrentGrabGun()
