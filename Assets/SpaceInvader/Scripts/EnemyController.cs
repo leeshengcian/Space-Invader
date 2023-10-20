@@ -38,8 +38,6 @@ public class EnemyController : MonoBehaviour
         // initial state
         currState = State.MovingHorizontally;
 
-        BloodParticle = GameObject.Find("Blood");
-
         // game manager
         gm = GameObject.FindObjectOfType<GameManager>();
 
@@ -120,14 +118,15 @@ public class EnemyController : MonoBehaviour
         // set the state to dead
         currState = State.Dead;
 
-        //[implement your own effect here]
+        // sound effect when enemy death
         FindObjectOfType<AudioManager>().Play("EnemyDeath");
-        //[Example]
+
         Destroy(gameObject);
-        //BloodParticle = FindObjectOfType<ParticleSystem>();
+
+        // visual effect when enemy being shot
+        BloodParticle = GameObject.FindGameObjectWithTag("Blood");
         BloodParticle.transform.position = transform.position;
         BloodParticle.GetComponent<ParticleSystem>().Play();
-        //[End of Example]
 
         // decrease number of enemies
         em.numEnemies--;
