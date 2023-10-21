@@ -120,6 +120,8 @@ public class PlayerController : MonoBehaviour
 
             // gun shot audio effect
             FindObjectOfType<AudioManager>().Play("BulletShot");
+
+            // generate bullet on the gun muzzle
             OnFire(ShootOutput);
         }
     }
@@ -136,6 +138,8 @@ public class PlayerController : MonoBehaviour
 
             // gun shot audio effect
             FindObjectOfType<AudioManager>().Play("BulletShot");
+
+            // generate bullet on the gun muzzle
             OnFire(ShootOutput);
         }
     }
